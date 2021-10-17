@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fooddeliveryapp/screens/detail_screen.dart';
+import 'detail_screen.dart';
 import '../components/category_title.dart';
 import '../components/food_card.dart';
 
@@ -84,7 +84,7 @@ class HomeScreen extends StatelessWidget {
                   description:
                   "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. ",
                 ),
-                SizedBox(width: 20),
+                const SizedBox(width: 20),
               ],
             ),
           ),
