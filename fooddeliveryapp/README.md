@@ -1,16 +1,2 @@
-# fooddeliveryapp
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Stack - Positioned를 통해 다양한 스타일의 컴포넌트 제작가능
+2. TextTheme에서 다양한 style ex)button,bodyText1 등 이용하기
