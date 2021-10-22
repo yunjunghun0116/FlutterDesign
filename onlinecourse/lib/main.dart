@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false, //우측상단 디버그표시 없앰
       title: 'Course Design',
       theme: ThemeData(
       ),
