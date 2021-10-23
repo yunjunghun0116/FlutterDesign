@@ -60,7 +60,7 @@ class HomeScreen extends StatelessWidget {
               children: [
                 const Text('Category', style: kTitleTextStyle),
                 Text('See all',
-                    style: kSubtitleTextSyule.copyWith(color: kBlueColor)),
+                    style: kSubtitleTextStyle.copyWith(color: kBlueColor)),
               ],
             ),
             const SizedBox(height: 30),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:onlinecourse/screens/details_screen.dart';
 import 'package:onlinecourse/screens/home_screen.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Course Design',
       theme: ThemeData(
       ),
-      home: const HomeScreen(),
+      home: const DetailsScreen(),
     );
   }
 }
