@@ -9,7 +9,7 @@ class FlowRoundedButton extends StatelessWidget {
   const FlowRoundedButton({
     Key? key,
     required this.title,
-    required this.radius,
+    this.radius = 30,
     required this.press,
   }) : super(key: key);
 

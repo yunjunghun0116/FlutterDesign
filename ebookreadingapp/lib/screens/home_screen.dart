@@ -1,8 +1,8 @@
+import 'package:ebookreadingapp/components/best_day_card.dart';
+import 'package:ebookreadingapp/components/continue_reading_card.dart';
+import 'package:ebookreadingapp/constants.dart';
 import 'package:flutter/material.dart';
-
-import '../components/book_rating.dart';
-import '../components/flow_rounded_button.dart';
-import '../constants.dart';
+import '../components/book_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -12,6 +12,7 @@ class HomeScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         width: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -20,120 +21,78 @@ class HomeScreen extends StatelessWidget {
             fit: BoxFit.fitWidth,
           ),
         ),
-        child: SafeArea(
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: size.height * 0.05),
-              Padding(
-                padding: const EdgeInsets.only(left: 24),
-                child: RichText(
-                  text: TextSpan(
-                    style: Theme.of(context).textTheme.headline4,
-                    children: const [
-                      TextSpan(text: 'What are you \nreading'),
-                      TextSpan(
-                          text: 'Today?',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                    ],
-                  ),
+              SizedBox(height: size.height * 0.1),
+              RichText(
+                text: TextSpan(
+                  style: Theme.of(context).textTheme.headline5,
+                  children: const [
+                    TextSpan(text: 'What are you \nreading'),
+                    TextSpan(
+                        text: 'Today?',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                  ],
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.only(top: 20),
-                width: 200,
-                height: 250,
-                child: Stack(
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
                   children: [
-                    Positioned(
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      child: Container(
-                        height: 220,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(30),
-                          boxShadow: [
-                            BoxShadow(
-                              offset: const Offset(0, 10),
-                              blurRadius: 30,
-                              color: kShadowColor,
-                            ),
-                          ],
-                        ),
-                      ),
+                    BookCard(
+                      image: 'assets/images/book-1.png',
+                      title: 'Crushing & Influence\n',
+                      author: 'Gary Venchuk',
+                      rating: 4.9,
+                      pressDetails: () {},
+                      pressRead: () {},
                     ),
-                    Image.asset('assets/images/book-1.png', width: 150),
-                    Positioned(
-                      top: 35,
-                      right: 10,
-                      child: Column(
-                        children: [
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.favorite_border),
-                          ),
-                          const BookRating(score: 4.9),
-                        ],
-                      ),
+                    BookCard(
+                      image: 'assets/images/book-2.png',
+                      title: 'Top Ten Business Hacks\n',
+                      author: 'Herman Joel',
+                      rating: 4.8,
+                      pressDetails: () {},
+                      pressRead: () {},
                     ),
-                    Positioned(
-                      bottom: 0,
-                      child: SizedBox(
-                        height: 100,
-                        width: 200,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: RichText(
-                                text: const TextSpan(
-                                  style: TextStyle(color: kBlackColor),
-                                  children: [
-                                    TextSpan(
-                                      text: 'Crushing & Influence\n',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: 'Gary Venchuk',
-                                      style: TextStyle(
-                                        color: kLightBlackColor,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const Spacer(),
-                            Row(
-                              children: [
-                                Container(
-                                  width: 100,
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 10),
-                                  alignment: Alignment.center,
-                                  child: const Text('Details'),
-                                ),
-                                Expanded(
-                                  child: FlowRoundedButton(
-                                    title: 'Read',
-                                    radius: 30,
-                                    press: () {},
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                  ],
+                ),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      style: Theme.of(context).textTheme.headline5,
+                      children: const [
+                        TextSpan(text: 'Best of the '),
+                        TextSpan(
+                            text: 'day',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+                  ),
+                  BestDayCard(size: size),
+                ],
+              ),
+              RichText(
+                text: TextSpan(
+                  style: Theme.of(context).textTheme.headline5,
+                  children: const [
+                    TextSpan(text: 'Continue '),
+                    TextSpan(
+                      text: 'reading...',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
                 ),
               ),
+              ContinueReadingCard(size: size),
+              const SizedBox(height: 50),
             ],
           ),
         ),
