@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
-
 import '../constants.dart';
 import 'book_rating.dart';
 import 'flow_rounded_button.dart';
 
-//TODO 여기 설정하기
 class BestDayCard extends StatelessWidget {
+  final String dayTitle;
+  final String bookTitle;
+  final String bookAuthor;
+  final double rating;
+  final String explanation;
+  final String image;
+  final Function press;
   const BestDayCard({
     Key? key,
-    required this.size,
+    required this.size, required this.dayTitle, required this.bookTitle, required this.bookAuthor, required this.rating, required this.explanation, required this.image, required this.press,
   }) : super(key: key);
 
   final Size size;
@@ -37,37 +42,37 @@ class BestDayCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'New York Time Best \nFor 11th March 2020',
-                    style: TextStyle(
+                  Text(
+                    dayTitle,
+                    style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 10),
-                  const Text(
-                    'How To Win \nFriends & Influence',
-                    style: TextStyle(
+                  Text(
+                    bookTitle,
+                    style: const TextStyle(
                       fontSize: 16,
                     ),
                   ),
-                  const Text(
-                    'Gary Venchuk',
-                    style: TextStyle(
+                  Text(
+                    bookAuthor,
+                    style: const TextStyle(
                       fontSize: 12,
                       color: kLightBlackColor,
                     ),
                   ),
                   Row(
-                    children: const [
-                      BookRating(score: 5.0),
-                      SizedBox(width: 10),
+                    children: [
+                      BookRating(score: rating),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: Text(
-                          'When the earth was flat and everyone wanted to win the game of the best and people wow',
+                          explanation,
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 10,
                             color: kLightBlackColor,
                           ),
@@ -83,7 +88,7 @@ class BestDayCard extends StatelessWidget {
             top: 0,
             right: 0,
             child: Image.asset(
-              'assets/images/book-3.png',
+              image,
               width: size.width * 0.4,
             ),
           ),
@@ -95,7 +100,9 @@ class BestDayCard extends StatelessWidget {
               height: 40,
               child: FlowRoundedButton(
                 title: 'Read',
-                press: () {},
+                press: () {
+                  press();
+                },
               ),
             ),
           ),

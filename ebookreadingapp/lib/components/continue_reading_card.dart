@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-
 import '../constants.dart';
-//TODO 여기 설정하기
 class ContinueReadingCard extends StatelessWidget {
+  final String title;
+  final String author;
+  final String progress;
+  final String image;
   const ContinueReadingCard({
     Key? key,
-    required this.size,
+    required this.size, required this.title, required this.author, required this.progress, required this.image,
   }) : super(key: key);
 
   final Size size;
@@ -21,8 +23,8 @@ class ContinueReadingCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(30),
         boxShadow: [
           BoxShadow(
-            offset: const Offset(0, 10),
-            blurRadius: 30,
+            offset: const Offset(5, 10),
+            blurRadius: 3,
             color: const Color(0xFFD3D3D3).withOpacity(0.8),
           ),
         ],
@@ -41,36 +43,36 @@ class ContinueReadingCard extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           Text(
-                            'Crushing & Influence',
-                            style: TextStyle(
+                            title,
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
-                            'Gary Venchuk',
-                            style: TextStyle(
+                            author,
+                            style: const TextStyle(
                               color: kLightBlackColor,
                             ),
                           ),
-                          SizedBox(height: 5),
+                          const SizedBox(height: 5),
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Text(
-                              'Chapter 7 of 10',
-                              style: TextStyle(
+                              progress,
+                              style: const TextStyle(
                                 fontSize: 10,
                                 color: kLightBlackColor,
                               ),
                             ),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                         ],
                       ),
                     ),
                     Image.asset(
-                      'assets/images/book-1.png',
+                      image,
                       width: 55,
                     ),
                   ],

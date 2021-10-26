@@ -1,6 +1,6 @@
 import 'package:ebookreadingapp/components/best_day_card.dart';
 import 'package:ebookreadingapp/components/continue_reading_card.dart';
-import 'package:ebookreadingapp/constants.dart';
+import 'package:ebookreadingapp/screens/detail_screen.dart';
 import 'package:flutter/material.dart';
 import '../components/book_card.dart';
 
@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: size.height * 0.1),
+              SizedBox(height: size.height * 0.05),
               RichText(
                 text: TextSpan(
                   style: Theme.of(context).textTheme.headline5,
@@ -47,7 +47,12 @@ class HomeScreen extends StatelessWidget {
                       author: 'Gary Venchuk',
                       rating: 4.9,
                       pressDetails: () {},
-                      pressRead: () {},
+                      pressRead: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return const DetailScreen();
+                        }));
+                      },
                     ),
                     BookCard(
                       image: 'assets/images/book-2.png',
@@ -55,7 +60,12 @@ class HomeScreen extends StatelessWidget {
                       author: 'Herman Joel',
                       rating: 4.8,
                       pressDetails: () {},
-                      pressRead: () {},
+                      pressRead: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return const DetailScreen();
+                        }));
+                      },
                     ),
                   ],
                 ),
@@ -74,7 +84,22 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  BestDayCard(size: size),
+                  BestDayCard(
+                    size: size,
+                    dayTitle: 'New York Time Best \nFor 11th March 2020',
+                    bookTitle: 'How To Win \nFriends & Influence',
+                    bookAuthor: 'Gary Venchuk',
+                    explanation:
+                        'When the earth was flat and everyone wanted to win the game of the best and people wow',
+                    rating: 5.0,
+                    image: 'assets/images/book-3.png',
+                    press: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const DetailScreen();
+                      }));
+                    },
+                  ),
                 ],
               ),
               RichText(
@@ -91,7 +116,20 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              ContinueReadingCard(size: size),
+              ContinueReadingCard(
+                size: size,
+                title: 'Crushing & Influence',
+                author: 'Gary Venchuk',
+                image: 'assets/images/book-1.png',
+                progress: 'Chapter 7 of 10',
+              ),
+              ContinueReadingCard(
+                size: size,
+                title: 'Crushing & Influence',
+                author: 'Gary Venchuk',
+                image: 'assets/images/book-1.png',
+                progress: 'Chapter 7 of 10',
+              ),
               const SizedBox(height: 50),
             ],
           ),
@@ -100,4 +138,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-

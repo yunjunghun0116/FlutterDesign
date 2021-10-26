@@ -99,7 +99,9 @@ class BookCard extends StatelessWidget {
                       Expanded(
                         child: FlowRoundedButton(
                           title: 'Read',
-                          press: () {},
+                          press: () {
+                            pressRead();
+                          },
                         ),
                       ),
                     ],
