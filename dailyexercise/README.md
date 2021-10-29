@@ -7,3 +7,7 @@
     1) 컴포넌트를 LayoutBuilder로 감싼다.
     2) builder의 입력값을 (context,constraint)로 설정한다. -> constraint를 통해 부모위젯에서 사용할 수 있는 width/height를 넘겨받는다.
     3) 이를 constraint.maxWidth/2 접근해서 자식위젯의 크기를 설정한다.
+
+## 결과물
+
+![ui](https://user-images.githubusercontent.com/76200940/139385026-e4a44d14-efd5-40be-9857-5e8344e3a4d1.png)
