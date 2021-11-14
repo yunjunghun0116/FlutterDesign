@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:signapp/components/input_field_container.dart';
 import 'package:signapp/components/rounded_button.dart';
 import 'package:signapp/constants.dart';
+import 'package:signapp/screens/main_screen.dart';
 import 'package:signapp/screens/signup_screen.dart';
+import 'package:signapp/utilities/connect_server.dart';
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final RequestToServer rts = RequestToServer();
   LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    late SharedPreferences _sharedPreferences;
+    SharedPreferences.getInstance()
+        .then((value) => {_sharedPreferences = value});
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SizedBox(
@@ -66,14 +73,29 @@ class LoginScreen extends StatelessWidget {
                   ),
                   RoundedButton(
                     size: size,
-                    onClicked: () {},
+                    onClicked: () async {
+                      Map<String, dynamic> res =
+                          await rts.loginWithEmailAndPassword(
+                              _emailController.text, _passwordController.text);
+                      if (res['success'] == true) {
+                        await _sharedPreferences.setString(
+                            'userId', res['userInfo']['_id']);
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return const MainScreen();
+                        }));
+                      } else {
+                        print(res['msg']);
+                      }
+                    },
                     title: 'LOGIN',
                     color: kPrimaryColor,
                     fontColor: Colors.white,
                   ),
                   GestureDetector(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context){
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
                         return SignUpScreen();
                       }));
                     },
@@ -82,12 +104,13 @@ class LoginScreen extends StatelessWidget {
                         style: TextStyle(color: kPrimaryColor),
                         children: [
                           TextSpan(text: 'Don\'t have an Account? '),
-                          TextSpan(text: 'Sign Up',style: TextStyle(fontWeight: FontWeight.bold)),
+                          TextSpan(
+                              text: 'Sign Up',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
                         ],
                       ),
                     ),
                   ),
-
                 ],
               ),
             ),

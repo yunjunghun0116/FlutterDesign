@@ -1,18 +1,27 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:signapp/components/input_field_container.dart';
 import 'package:signapp/components/rounded_button.dart';
+import 'package:signapp/utilities/connect_server.dart';
 
 import '../constants.dart';
 import 'login_screen.dart';
+import 'main_screen.dart';
 
 class SignUpScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final RequestToServer rts = RequestToServer();
   SignUpScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    late SharedPreferences _sharedPreferences;
+    SharedPreferences.getInstance()
+        .then((value) => {_sharedPreferences = value});
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SizedBox(
@@ -67,7 +76,21 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   RoundedButton(
                     size: size,
-                    onClicked: () {},
+                    onClicked: () async {
+                      Map<String, dynamic> res =
+                          await rts.registerWithEmailAndPassword(
+                              _emailController.text, _passwordController.text);
+                      if (res['success'] == true) {
+                        await _sharedPreferences.setString(
+                            'userId', res['userInfo']['_id']);
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return const MainScreen();
+                        }));
+                      } else {
+                        print(res['msg']);
+                      }
+                    },
                     title: 'SIGN UP',
                     color: kPrimaryColor,
                     fontColor: Colors.white,
@@ -118,21 +141,21 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: size.width*0.7,
+                    width: size.width * 0.7,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         SocialIcon(
                           iconSrc: 'assets/icons/facebook.svg',
-                          onClicked: (){},
+                          onClicked: () {},
                         ),
                         SocialIcon(
                           iconSrc: 'assets/icons/twitter.svg',
-                          onClicked: (){},
+                          onClicked: () {},
                         ),
                         SocialIcon(
                           iconSrc: 'assets/icons/google-plus.svg',
-                          onClicked: (){},
+                          onClicked: () {},
                         ),
                       ],
                     ),
@@ -151,13 +174,15 @@ class SocialIcon extends StatelessWidget {
   final String iconSrc;
   final Function onClicked;
   const SocialIcon({
-    Key? key, required this.iconSrc, required this.onClicked,
+    Key? key,
+    required this.iconSrc,
+    required this.onClicked,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         onClicked();
       },
       child: Container(
